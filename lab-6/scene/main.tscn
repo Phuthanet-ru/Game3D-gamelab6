@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4xtv3hp3gudb"]
+
+[ext_resource type="Script" uid="uid://do0j2de6vllkb" path="res://scene/main.gd" id="1_v0l8b"]
+[ext_resource type="PackedScene" uid="uid://dlkn68io0o2c8" path="res://scene/monky.tscn" id="2_wp4xf"]
+[ext_resource type="Texture2D" uid="uid://0x863hii70uu" path="res://Asset/rainforest_trail_4k.exr" id="3_wp4xf"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_brvut"]
+panorama = ExtResource("3_wp4xf")
+
+[sub_resource type="Sky" id="Sky_wp4xf"]
+sky_material = SubResource("PanoramaSkyMaterial_brvut")
+
+[sub_resource type="Environment" id="Environment_itxqv"]
+background_mode = 2
+sky = SubResource("Sky_wp4xf")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0l8b"]
+size = Vector3(41.169373, 1, 25.176819)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp4xf"]
+albedo_color = Color(0.3529412, 0.27450982, 0.1254902, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wp4xf"]
+material = SubResource("StandardMaterial3D_wp4xf")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_v0l8b")
+
+[node name="monky" parent="." instance=ExtResource("2_wp4xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.711993, 0, 0)
+
+[node name="monky2" parent="." instance=ExtResource("2_wp4xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1243973, 0, 0)
+
+[node name="monky3" parent="." instance=ExtResource("2_wp4xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.037529, 0, 0)
+
+[node name="monky4" parent="." instance=ExtResource("2_wp4xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.241148, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018419385, 9.594673, 9.187917)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_itxqv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.239582, 11.345181)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.032562256, 0, -4.3753967)
+shape = SubResource("BoxShape3D_v0l8b")
+debug_color = Color(0.27765357, 0.2303679, 0.24577838, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(18.972647, 0, 0, 0, 0.9865042, 0, 0, 0, 6.380241, 0, 0, 0)
+mesh = SubResource("PlaneMesh_wp4xf")
